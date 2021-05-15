@@ -2,7 +2,7 @@ name: 'Newman CLI (Postman) Action'
 description: 'Runner for Postman Collections using Newman CLI'
 author: 'Anthony Zigenbine'
 branding:
-  icon: 'terminal'  
+  icon: 'terminal'
   color: 'orange'
 inputs:
   apiKey:
@@ -80,6 +80,9 @@ inputs:
     required: false
   sslClientPassphrase:
     description: 'Secret client key passphrase'
+    required: false
+  envVar:
+    description: 'Env variables'
     required: false
 outputs:
   summary:

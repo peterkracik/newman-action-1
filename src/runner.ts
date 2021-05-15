@@ -6,6 +6,7 @@ export async function run(
   options: newman.NewmanRunOptions
 ): Promise<newman.NewmanRunSummary> {
   return new Promise(resolve => {
+    console.log(options)
     newman
       .run(options)
       .on('start', (): void => {
@@ -66,7 +67,8 @@ export async function createOptions(): Promise<newman.NewmanRunOptions> {
       color: getColor(core.getInput('color')),
       sslClientCert: core.getInput('sslClientCert'),
       sslClientKey: core.getInput('sslClientKey'),
-      sslClientPassphrase: core.getInput('sslClientPassphrase')
+      sslClientPassphrase: core.getInput('sslClientPassphrase'),
+      envVar: core.getInput('envVar')
     }
 
     resolve(options)
