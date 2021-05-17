@@ -5,13 +5,16 @@ import * as utils from './utils'
 export async function run(
   options: newman.NewmanRunOptions
 ): Promise<newman.NewmanRunSummary> {
+  console.log('run newman');
   return new Promise((resolve, rejects) => {
     try {
+      console.log('options');
+      console.log(options);
       newman
         .run(options)
         .on('start', (err, args): void => {
-          console.error(err)
-          console.log(args)
+          console.error(err);
+          console.log(args);
           core.debug(`beginning collection run`)
         })
         .on('done', (err: Error, summary: newman.NewmanRunSummary): void => {
@@ -25,10 +28,11 @@ export async function run(
           }
           resolve(summary)
         })
-    } catch (e) {
-      console.error(e)
-      rejects(e)
-    }
+      } catch (e) {
+        console.log('after');
+        console.error(e);
+        rejects(e);
+      }
   })
 }
 
