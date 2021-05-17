@@ -9,7 +9,9 @@ export async function run(
     console.log(options)
     newman
       .run(options)
-      .on('start', (): void => {
+      .on('start', (err, args): void => {
+        console.error(err)
+        console.log(args)
         core.debug(`beginning collection run`)
       })
       .on('done', (err: Error, summary: newman.NewmanRunSummary): void => {
