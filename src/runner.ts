@@ -10,17 +10,9 @@ export async function run(
     try {
       console.log('options')
       console.log(options)
-      newman
-        .run(options)
-        .on('start', (err, args): void => {
-          console.error(err)
-          console.log(args)
-          core.debug(`beginning collection run`)
-        })
-        .on('error', (err: any): void => {
-          console.log(err)
-        })
-        .on('done', (err: Error, summary: newman.NewmanRunSummary): void => {
+      newman.run(
+        options,
+        (err: Error | null, summary: newman.NewmanRunSummary) => {
           if (
             !options.suppressExitCode &&
             (err || summary.error || summary.run.failures.length)
@@ -30,7 +22,18 @@ export async function run(
             core.debug('collection run completed.')
           }
           resolve(summary)
-        })
+        }
+      )
+      //.on('start', (err, args): void => {
+      //console.error(err)
+      //console.log(args)
+      //core.debug(`beginning collection run`)
+      //})
+      //.on('error', (err: any): void => {
+      //console.log(err)
+      //})
+      //.on('done', (err: Error, summary: newman.NewmanRunSummary): void => {
+      //})
     } catch (e) {
       console.log('after')
       console.error(e)
