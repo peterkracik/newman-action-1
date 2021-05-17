@@ -17,6 +17,9 @@ export async function run(
           console.log(args)
           core.debug(`beginning collection run`)
         })
+        .on('error', (err: any): void => {
+          console.log(err)
+        })
         .on('done', (err: Error, summary: newman.NewmanRunSummary): void => {
           if (
             !options.suppressExitCode &&
